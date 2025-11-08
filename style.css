@@ -57,7 +57,7 @@ body {
 }
 
 .perfil:hover {
-  box-shadow: 0 0 20px var(--cor-cinza);
+  box-shadow: 0 0 20px var(--cor-cinza-transparente);
 }
 
 .perfil__imagem {

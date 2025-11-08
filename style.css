@@ -60,7 +60,7 @@ body {
 }
 
 .perfil__botao,
-#modo-noturno {
+#modo__noturno {
     all: unset;
     display: flex;
     align-items: center;
@@ -77,7 +77,7 @@ body {
     transition: background-color 0.3s, color 0.3s, transform 0.2s;
 }
 .perfil__botao:hover,
-#modo-noturno:hover {
+#modo__noturno:hover {
     background: #38df96;
     color: #000;
     transform: translateY(-2px);
@@ -98,20 +98,20 @@ body.dark .perfil__imagem {
 }
 
 @media (max-width: 480px) {
-  .container {
+  .perfil {
     transform: scale(1.10);
     padding: 30px 20px;
   }
 }
 
 @media (min-width: 1200px) {
-  .container {
+  .perfil {
     transform: scale(0.75); 
   }
 }
 
 @media (min-width: 1600px) {
-  .container {
+  .perfil {
     transform: scale(1.0);
   }
 }

@@ -1,4 +1,4 @@
-const botao = document.getElementById('modo-noturno');
+const botao = document.getElementById('modo__noturno');
 const body = document.body;
 const icone = botao.querySelector('i');
 

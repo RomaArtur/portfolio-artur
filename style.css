@@ -6,6 +6,7 @@
 
   --cor-branca: #ffffff;
   --cor-preta: #1c1b1d;
+  --cor-cinza-transparente: #d8d8daed;
 
   --font-family-main: "Poppins", sans-serif;
 
@@ -56,7 +57,7 @@ body {
 }
 
 .perfil:hover {
-  box-shadow: 0 0 20px var(--cor-branca);
+  box-shadow: 0 0 20px var(--cor-cinza);
 }
 
 .perfil__imagem {

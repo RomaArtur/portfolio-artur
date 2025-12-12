@@ -6,7 +6,6 @@ const ICONS = {
 document.addEventListener('DOMContentLoaded', () => {
   const themeToggleBtn = document.getElementById('theme-toggle');
   const btnText = themeToggleBtn.querySelector('.btn-text');
-  
   const body = document.body;
   const savedTheme = localStorage.getItem('theme');
 
@@ -39,14 +38,52 @@ document.addEventListener('DOMContentLoaded', () => {
 
   function updateUI(isLightMode) {
     btnText.textContent = isLightMode ? 'Modo Escuro' : 'Modo Claro';
-
     const iconToRender = isLightMode ? ICONS.moon : ICONS.sun;
-    
     const existingSvg = themeToggleBtn.querySelector('svg');
-    if (existingSvg) {
-      existingSvg.remove();
-    }
-    
+    if (existingSvg) existingSvg.remove();
     themeToggleBtn.insertAdjacentHTML('afterbegin', iconToRender);
+  }
+
+  fetchProfileData();
+
+  async function fetchProfileData() {
+    try {
+      console.log('Iniciando busca de dados...');
+      const response = await fetch('/api/profile'); 
+      
+      if (!response.ok) {
+        throw new Error(`Erro HTTP! status: ${response.status}`);
+      }
+
+      const data = await response.json();
+      console.log('Dados recebidos:', data);
+      
+      const profile = Array.isArray(data) ? data[0] : data;
+
+      if (profile) {
+        if(profile.name) document.getElementById('name').textContent = profile.name;
+        if(profile.bio) document.getElementById('bio').textContent = profile.bio;
+
+        updateLink('linkedinUrl', profile.linkedinUrl);
+        updateLink('githubUrl', profile.githubUrl);
+        updateLink('whatsappUrl', profile.whatsappUrl);
+        updateLink('curriculumVitaeUrl', profile.curriculumVitaeUrl);
+      } else {
+        console.warn('Perfil vazio ou não encontrado.');
+      }
+    } catch (error) {
+      console.error('Erro ao carregar perfil:', error);
+      document.getElementById('bio').textContent = "Erro ao carregar dados. Verifique o console para a causa (404/Erro de Rede).";
+    }
+  }
+
+  function updateLink(elementId, url) {
+    const element = document.getElementById(elementId);
+    if (element && url) {
+      element.href = url;
+    } else if (element) {
+      console.log(`URL vazia para ${elementId}, escondendo botão.`);
+      element.style.display = 'none'; 
+    }
   }
 });
